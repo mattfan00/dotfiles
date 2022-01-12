@@ -32,6 +32,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -45,7 +46,8 @@ Plug 'tmsvg/pear-tree'
 call plug#end()
 " end the plugins 
 
-let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_contrast_light = 'hard'
 
 colorscheme gruvbox
 set background=dark
@@ -55,9 +57,9 @@ if executable('rg')
 endif
 
 let mapleader = " "
-let g:netrw_browse_split = 2
-let g:netrw_banner = 0
-let g:netrw_winsize = 25
+"let g:netrw_browse_split = 2
+"let g:netrw_banner = 0
+"let g:netrw_winsize = 25
 
 let g:ctrlp_use_caching = 0 
 
