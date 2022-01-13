@@ -46,11 +46,11 @@ Plug 'tmsvg/pear-tree'
 call plug#end()
 " end the plugins 
 
-let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
-
 colorscheme gruvbox
 set background=dark
+
 
 if executable('rg')
     let g:rg_derive_root='true'
