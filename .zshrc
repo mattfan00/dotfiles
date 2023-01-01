@@ -8,6 +8,9 @@ alias mkdir="noglob mkdir"
 alias cd="noglob cd"
 alias rm="noglob rm"
 
+# deno
+export PATH="/Users/matthewfan/.deno/bin:$PATH"
+
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/matthewfan/.oh-my-zsh"
 

@@ -42,6 +42,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tmsvg/pear-tree'
+Plug 'alvan/vim-closetag'
 
 call plug#end()
 " end the plugins 
