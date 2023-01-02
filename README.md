@@ -1,3 +1,4 @@
 # dotfiles
 
-use `ln -f [original_file] [new_file]` to add dotfile to this repo
+use `ln -s [dotfile] [dest]` to place a dotfile from this repo into the destination (usually the home dir)
+use absolute paths
