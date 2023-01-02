@@ -1,6 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 
-vim.g.mapleader = " " 
+vim.g.mapleader = " "
 
 vim.opt.guicursor = ""
 vim.opt.cul = true -- cursorline
