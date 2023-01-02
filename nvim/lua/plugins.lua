@@ -25,6 +25,7 @@ require("packer").startup(function(use)
         run = ":TSUpdate"
     }
     use "tpope/vim-fugitive"
+
     use {
         "VonHeikemen/lsp-zero.nvim",
         requires = {
@@ -84,6 +85,10 @@ require("nvim-treesitter.configs").setup {
     },
 }
 
+-- mason.nvim to install and manage LSPs
+-- :MasonInstall <arg>
+-- lsp-config add LSPs to nvim
+-- nvim-cmp for autocompletion
 local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
