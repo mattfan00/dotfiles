@@ -52,6 +52,7 @@ require("packer").startup(function(use)
         }
     }
     use "fatih/vim-go"
+    use "cohama/lexima.vim"
 
     if packer_bootstrap then
         require("packer").sync()
