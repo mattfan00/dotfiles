@@ -15,18 +15,16 @@ local packer_bootstrap = ensure_packer()
 require("packer").startup(function(use)
     -- Packer can manage itself
     use "wbthomason/packer.nvim"
-
     use "ellisonleao/gruvbox.nvim"
-
     use {
         "nvim-telescope/telescope.nvim", tag = "0.1.0",
         requires = { {"nvim-lua/plenary.nvim"} }
     }
-
     use {
         "nvim-treesitter/nvim-treesitter", 
         run = ":TSUpdate"
     }
+    use "tpope/vim-fugitive"
 
     if packer_bootstrap then
         require("packer").sync()

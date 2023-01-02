@@ -41,10 +41,14 @@ vim.keymap.set("n", "<leader>k", ":wincmd k<CR>")
 vim.keymap.set("n", "<leader>l", ":wincmd l<CR>")
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>a", "<C-^>")
 
 -- telescope
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
 vim.keymap.set("n", "<C-p>", builtin.git_files, {})
 vim.keymap.set("n", "<leader>ps", builtin.live_grep, {})
+
+-- fugitive
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
