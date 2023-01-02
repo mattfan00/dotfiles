@@ -26,6 +26,9 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
 vim.o.background = "dark"
 vim.opt.termguicolors = true
 
@@ -42,7 +45,20 @@ vim.keymap.set("n", "<leader>k", ":wincmd k<CR>")
 vim.keymap.set("n", "<leader>l", ":wincmd l<CR>")
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+-- swtich to alternate (previous) file
 vim.keymap.set("n", "<leader>a", "<C-^>")
+
+-- keep cursor in middle when searching
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+-- dont replace buffer when pasting over
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+-- yank into system clipboard
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- telescope
 local builtin = require("telescope.builtin")

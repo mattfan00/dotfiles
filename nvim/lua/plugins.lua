@@ -15,7 +15,7 @@ local packer_bootstrap = ensure_packer()
 require("packer").startup(function(use)
     -- Packer can manage itself
     use "wbthomason/packer.nvim"
-    use { 
+    use {
         "ellisonleao/gruvbox.nvim",
         config = function ()
             vim.cmd("colorscheme gruvbox")
