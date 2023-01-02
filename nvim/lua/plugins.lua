@@ -15,7 +15,12 @@ local packer_bootstrap = ensure_packer()
 require("packer").startup(function(use)
     -- Packer can manage itself
     use "wbthomason/packer.nvim"
-    use "ellisonleao/gruvbox.nvim"
+    use { 
+        "ellisonleao/gruvbox.nvim",
+        config = function ()
+            vim.cmd("colorscheme gruvbox")
+        end
+    }
     use {
         "nvim-telescope/telescope.nvim", tag = "0.1.0",
         requires = { {"nvim-lua/plenary.nvim"} }
@@ -25,7 +30,6 @@ require("packer").startup(function(use)
         run = ":TSUpdate"
     }
     use "tpope/vim-fugitive"
-
     use {
         "VonHeikemen/lsp-zero.nvim",
         requires = {
@@ -58,8 +62,6 @@ require("gruvbox").setup({
     italic = false,
     contrast = "hard",
 })
-vim.o.background = "dark"
-vim.cmd("colorscheme gruvbox")
 
 require("nvim-treesitter.configs").setup {
     -- A list of parser names, or "all"

@@ -26,6 +26,7 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
+vim.o.background = "dark"
 vim.opt.termguicolors = true
 
 vim.opt.colorcolumn = "80"
