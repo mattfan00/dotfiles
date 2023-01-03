@@ -69,3 +69,14 @@ vim.keymap.set("n", "<leader>ps", builtin.live_grep, {})
 -- fugitive
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
+-- lsp
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = false,
+})
+vim.o.updatetime = 250
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
