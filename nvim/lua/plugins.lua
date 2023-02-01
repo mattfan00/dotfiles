@@ -15,12 +15,11 @@ local packer_bootstrap = ensure_packer()
 require("packer").startup(function(use)
     -- Packer can manage itself
     use "wbthomason/packer.nvim"
-    use {
-        "ellisonleao/gruvbox.nvim",
-        config = function ()
-            vim.cmd("colorscheme gruvbox")
-        end
-    }
+
+    use "ellisonleao/gruvbox.nvim"
+    use { "catppuccin/nvim", as = "catppuccin" }
+    use "rebelot/kanagawa.nvim"
+
     use {
         "nvim-telescope/telescope.nvim", tag = "0.1.0",
         requires = { {"nvim-lua/plenary.nvim"} }
@@ -59,10 +58,18 @@ require("packer").startup(function(use)
     end
 end)
 
+--[[
 require("gruvbox").setup({
     italic = false,
     contrast = "hard",
 })
+
+require("catppuccin").setup({
+    flavour = "mocha",
+    no_italic = true,
+})
+]]--
+vim.cmd("colorscheme kanagawa")
 
 require("nvim-treesitter.configs").setup {
     -- A list of parser names, or "all"

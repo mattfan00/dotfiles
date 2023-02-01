@@ -32,6 +32,8 @@ vim.opt.incsearch = true
 vim.o.background = "dark"
 vim.opt.termguicolors = true
 
+vim.opt.signcolumn = "number"
+
 vim.opt.colorcolumn = "80"
 
 vim.opt.swapfile = false
