@@ -144,6 +144,11 @@ _G.packer_plugins = {
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["melange-nvim"] = {
+    loaded = true,
+    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/melange-nvim",
+    url = "https://github.com/savq/melange-nvim"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -179,10 +184,15 @@ _G.packer_plugins = {
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
-  ["vim-go"] = {
+  ["vim-monotone"] = {
     loaded = true,
-    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/vim-go",
-    url = "https://github.com/fatih/vim-go"
+    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/vim-monotone",
+    url = "https://github.com/Lokaltog/vim-monotone"
+  },
+  ["vim-paper"] = {
+    loaded = true,
+    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/vim-paper",
+    url = "https://github.com/yorickpeterse/vim-paper"
   }
 }
 

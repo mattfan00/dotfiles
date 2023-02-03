@@ -9,7 +9,6 @@ local ensure_packer = function()
     end
     return false
 end
-
 local packer_bootstrap = ensure_packer()
 
 require("packer").startup(function(use)
@@ -19,6 +18,9 @@ require("packer").startup(function(use)
     use "ellisonleao/gruvbox.nvim"
     use { "catppuccin/nvim", as = "catppuccin" }
     use "rebelot/kanagawa.nvim"
+    use "savq/melange-nvim"
+    use "yorickpeterse/vim-paper"
+    use "Lokaltog/vim-monotone"
 
     use {
         "nvim-telescope/telescope.nvim", tag = "0.1.0",
@@ -50,26 +52,12 @@ require("packer").startup(function(use)
             {"rafamadriz/friendly-snippets"},
         }
     }
-    use "fatih/vim-go"
     use "cohama/lexima.vim"
 
     if packer_bootstrap then
         require("packer").sync()
     end
 end)
-
---[[
-require("gruvbox").setup({
-    italic = false,
-    contrast = "hard",
-})
-
-require("catppuccin").setup({
-    flavour = "mocha",
-    no_italic = true,
-})
-]]--
-vim.cmd("colorscheme kanagawa")
 
 require("nvim-treesitter.configs").setup {
     -- A list of parser names, or "all"
@@ -119,6 +107,16 @@ lsp.configure("sumneko_lua", {
             }
         }
     }
+})
+
+local cmp = require("cmp")
+
+lsp.setup_nvim_cmp({
+    mapping = lsp.defaults.cmp_mappings({
+        ["<Tab>"] = cmp.mapping.confirm({select = false}),
+        ["<S-Tab>"] = vim.NIL,
+        ["<CR>"] = vim.NIL,
+    })
 })
 
 lsp.setup()

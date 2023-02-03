@@ -29,9 +29,6 @@ vim.opt.wrap = false
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
-vim.o.background = "dark"
-vim.opt.termguicolors = true
-
 vim.opt.signcolumn = "number"
 
 vim.opt.colorcolumn = "80"
@@ -48,7 +45,7 @@ vim.keymap.set("n", "<leader>l", ":wincmd l<CR>")
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
--- swtich to alternate (previous) file
+-- switch to alternate (previous) file
 vim.keymap.set("n", "<leader>a", "<C-^>")
 
 -- keep cursor in middle when searching
