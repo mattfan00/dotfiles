@@ -149,6 +149,16 @@ _G.packer_plugins = {
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/melange-nvim",
     url = "https://github.com/savq/melange-nvim"
   },
+  neovim = {
+    loaded = true,
+    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/neovim",
+    url = "https://github.com/rose-pine/neovim"
+  },
+  ["no-clown-fiesta.nvim"] = {
+    loaded = true,
+    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/no-clown-fiesta.nvim",
+    url = "https://github.com/aktersnurra/no-clown-fiesta.nvim"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/nvim-cmp",

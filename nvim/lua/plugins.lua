@@ -21,6 +21,8 @@ require("packer").startup(function(use)
     use "savq/melange-nvim"
     use "yorickpeterse/vim-paper"
     use "Lokaltog/vim-monotone"
+    use "aktersnurra/no-clown-fiesta.nvim"
+    use { "rose-pine/neovim", as = "rose-pine" }
 
     use {
         "nvim-telescope/telescope.nvim", tag = "0.1.0",
@@ -98,13 +100,24 @@ lsp.ensure_installed({
   "gopls",
 })
 
--- fix undefined global "vim"
 lsp.configure("sumneko_lua", {
     settings = {
         Lua = {
             diagnostics = {
+                -- fix undefined global "vim"
                 globals = { "vim" }
             }
+        }
+    }
+})
+
+lsp.configure("cssls", {
+    settings = {
+        css = {
+            lint = {
+                -- for tailwind
+	            unknownAtRules = "ignore"
+	        }
         }
     }
 })
