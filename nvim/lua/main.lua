@@ -52,6 +52,9 @@ vim.keymap.set("n", "<leader>a", "<C-^>")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
 -- dont replace buffer when pasting over
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
