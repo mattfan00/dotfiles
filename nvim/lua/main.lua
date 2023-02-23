@@ -71,3 +71,8 @@ vim.keymap.set("n", "<leader>ps", builtin.live_grep, {})
 -- fugitive
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
+-- format go files on save
+autocmd("BufWritePre", {
+    pattern = "*.go",
+    callback = function() vim.lsp.buf.format { async = true } end
+})
