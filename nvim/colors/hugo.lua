@@ -38,8 +38,8 @@ local highlight_groups = {
     PmenuSbar = "Pmenu",
     PmenuThumb = "PmenuSel",
 
-    StatusLine = { fg = palette.white, bg = palette.dark1, underline = true },
-    StatusLineNC = { fg = palette.tanWhite, bg = palette.dark1, underline = true },
+    StatusLine = { fg = palette.white, bg = palette.dark1 },
+    StatusLineNC = { fg = palette.tanWhite, bg = palette.dark1 },
     WildMenu = "NormalFloat",
 
     TabLine = { fg = palette.tanWhite, bg = palette.dark1 },
