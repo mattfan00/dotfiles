@@ -194,6 +194,11 @@ _G.packer_plugins = {
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
+  ["vim-godot"] = {
+    loaded = true,
+    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/vim-godot",
+    url = "https://github.com/habamax/vim-godot"
+  },
   ["vim-monotone"] = {
     loaded = true,
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/vim-monotone",

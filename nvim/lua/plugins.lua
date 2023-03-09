@@ -122,6 +122,10 @@ lsp.configure("cssls", {
     }
 })
 
+lsp.configure("gdscript", {
+    force_setup = true -- because LSP is global
+})
+
 local cmp = require("cmp")
 
 lsp.setup_nvim_cmp({
