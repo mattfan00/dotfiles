@@ -45,8 +45,8 @@ vim.keymap.set("n", "<leader>l", ":wincmd l<CR>")
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
--- switch to alternate (previous) file
-vim.keymap.set("n", "<leader>a", "<C-^>")
+vim.keymap.set("n", "<leader>a", "<C-^>") -- switch to alternate (previous) file
+vim.keymap.set("n", "<leader>o", "<C-W><C-O>") -- :only (close all windows but the current one)
 
 -- keep cursor in middle when searching
 vim.keymap.set("n", "n", "nzzzv")
@@ -62,6 +62,12 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
+-- restart LSP, useful for after go get)
+vim.keymap.set("n", "<leader>lr", function()
+    vim.cmd("LspRestart")
+    print("Restarted LSP")
+end)
+
 -- telescope
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
@@ -70,6 +76,22 @@ vim.keymap.set("n", "<leader>ps", builtin.live_grep, {})
 
 -- fugitive
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+vim.keymap.set("n", "<leader>gw", vim.cmd.Gwrite) -- git add
+
+-- harpoon
+local mark = require("harpoon.mark")
+local ui = require("harpoon.ui")
+
+vim.keymap.set("n", "<leader>ha", function()
+    mark.add_file()
+    print("Added harpoon mark")
+end)
+vim.keymap.set("n", "<C-h>", ui.toggle_quick_menu)
+vim.keymap.set("n", "<leader>1", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<leader>2", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<leader>3", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<leader>4", function() ui.nav_file(4) end)
+
 
 -- format go files on save
 autocmd("BufWritePre", {

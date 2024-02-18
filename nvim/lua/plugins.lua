@@ -21,8 +21,9 @@ require("packer").startup(function(use)
     use "savq/melange-nvim"
     use "yorickpeterse/vim-paper"
     use "Lokaltog/vim-monotone"
-    use "aktersnurra/no-clown-fiesta.nvim"
     use { "rose-pine/neovim", as = "rose-pine" }
+    use "projekt0n/github-nvim-theme"
+    use "neanias/everforest-nvim"
 
     use {
         "nvim-telescope/telescope.nvim", tag = "0.1.0",
@@ -55,6 +56,8 @@ require("packer").startup(function(use)
         }
     }
     use "cohama/lexima.vim"
+    use "nvim-lua/plenary.nvim"
+    use "ThePrimeagen/harpoon"
 
     if packer_bootstrap then
         require("packer").sync()

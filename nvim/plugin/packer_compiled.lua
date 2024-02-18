@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  bamboo = {
+    loaded = true,
+    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/bamboo",
+    url = "https://github.com/ribru17/bamboo.nvim"
+  },
   catppuccin = {
     loaded = true,
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/catppuccin",
@@ -114,10 +119,20 @@ _G.packer_plugins = {
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["github-nvim-theme"] = {
+    loaded = true,
+    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/github-nvim-theme",
+    url = "https://github.com/projekt0n/github-nvim-theme"
+  },
   ["gruvbox.nvim"] = {
     loaded = true,
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
     url = "https://github.com/ellisonleao/gruvbox.nvim"
+  },
+  harpoon = {
+    loaded = true,
+    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/harpoon",
+    url = "https://github.com/ThePrimeagen/harpoon"
   },
   ["kanagawa.nvim"] = {
     loaded = true,
@@ -148,11 +163,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/melange-nvim",
     url = "https://github.com/savq/melange-nvim"
-  },
-  ["no-clown-fiesta.nvim"] = {
-    loaded = true,
-    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/no-clown-fiesta.nvim",
-    url = "https://github.com/aktersnurra/no-clown-fiesta.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -193,11 +203,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
-  },
-  ["vim-godot"] = {
-    loaded = true,
-    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/vim-godot",
-    url = "https://github.com/habamax/vim-godot"
   },
   ["vim-monotone"] = {
     loaded = true,

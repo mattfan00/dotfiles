@@ -71,7 +71,7 @@ local highlight_groups = {
     ["@tag"] = { fg = palette.orange1 },
     ["@tag.attribute"] = { fg = palette.white },
 }
-
+ 
 for name, attrs in pairs (highlight_groups) do
     if type(attrs) == "table" then
         vim.api.nvim_set_hl(0, name, attrs)
