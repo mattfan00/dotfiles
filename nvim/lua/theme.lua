@@ -1,9 +1,10 @@
 vim.opt.termguicolors = true
 
 require('rose-pine').setup({
-    disable_italics = true,
     dark_variant = 'moon',
     styles = {
+        bold = false,
+        italic = false,
         transparency = true,
     },
 })
