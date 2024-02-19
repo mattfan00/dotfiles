@@ -15,18 +15,10 @@ require("packer").startup(function(use)
     -- Packer can manage itself
     use "wbthomason/packer.nvim"
 
-    use "ellisonleao/gruvbox.nvim"
-    use { "catppuccin/nvim", as = "catppuccin" }
-    use "rebelot/kanagawa.nvim"
-    use "savq/melange-nvim"
-    use "yorickpeterse/vim-paper"
-    use "Lokaltog/vim-monotone"
     use { "rose-pine/neovim", as = "rose-pine" }
-    use "projekt0n/github-nvim-theme"
-    use "neanias/everforest-nvim"
 
     use {
-        "nvim-telescope/telescope.nvim", tag = "0.1.0",
+        "nvim-telescope/telescope.nvim", tag = "0.1.4",
         requires = { {"nvim-lua/plenary.nvim"} }
     }
     use {

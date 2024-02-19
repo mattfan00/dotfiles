@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/matthewfan/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/matthewfan/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/matthewfan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/matthewfan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/matthewfan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/Users/matthewfan/.cache/nvim/packer_hererocks/2.1.1703358377/share/lua/5.1/?.lua;/Users/matthewfan/.cache/nvim/packer_hererocks/2.1.1703358377/share/lua/5.1/?/init.lua;/Users/matthewfan/.cache/nvim/packer_hererocks/2.1.1703358377/lib/luarocks/rocks-5.1/?.lua;/Users/matthewfan/.cache/nvim/packer_hererocks/2.1.1703358377/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/matthewfan/.cache/nvim/packer_hererocks/2.1.1703358377/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -78,16 +78,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
-  },
-  bamboo = {
-    loaded = true,
-    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/bamboo",
-    url = "https://github.com/ribru17/bamboo.nvim"
-  },
-  catppuccin = {
-    loaded = true,
-    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/catppuccin",
-    url = "https://github.com/catppuccin/nvim"
   },
   ["cmp-buffer"] = {
     loaded = true,
@@ -119,25 +109,10 @@ _G.packer_plugins = {
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
-  ["github-nvim-theme"] = {
-    loaded = true,
-    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/github-nvim-theme",
-    url = "https://github.com/projekt0n/github-nvim-theme"
-  },
-  ["gruvbox.nvim"] = {
-    loaded = true,
-    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
-    url = "https://github.com/ellisonleao/gruvbox.nvim"
-  },
   harpoon = {
     loaded = true,
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
-  },
-  ["kanagawa.nvim"] = {
-    loaded = true,
-    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/kanagawa.nvim",
-    url = "https://github.com/rebelot/kanagawa.nvim"
   },
   ["lexima.vim"] = {
     loaded = true,
@@ -158,11 +133,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
-  },
-  ["melange-nvim"] = {
-    loaded = true,
-    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/melange-nvim",
-    url = "https://github.com/savq/melange-nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -203,16 +173,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
-  },
-  ["vim-monotone"] = {
-    loaded = true,
-    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/vim-monotone",
-    url = "https://github.com/Lokaltog/vim-monotone"
-  },
-  ["vim-paper"] = {
-    loaded = true,
-    path = "/Users/matthewfan/.local/share/nvim/site/pack/packer/start/vim-paper",
-    url = "https://github.com/yorickpeterse/vim-paper"
   }
 }
 
