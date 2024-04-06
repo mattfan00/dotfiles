@@ -16,6 +16,8 @@ require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
 
     use { "rose-pine/neovim", as = "rose-pine" }
+    use "projekt0n/github-nvim-theme"
+    use "aktersnurra/no-clown-fiesta.nvim"
 
     use {
         "nvim-telescope/telescope.nvim", tag = "0.1.4",
@@ -47,7 +49,13 @@ require("packer").startup(function(use)
             {"rafamadriz/friendly-snippets"},
         }
     }
-    use "cohama/lexima.vim"
+    use {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            require("nvim-autopairs").setup {}
+        end
+    }
     use "nvim-lua/plenary.nvim"
     use "ThePrimeagen/harpoon"
 

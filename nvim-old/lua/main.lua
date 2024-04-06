@@ -1,5 +1,7 @@
 local autocmd = vim.api.nvim_create_autocmd
 
+vim.g.editorconfig = false
+
 vim.g.mapleader = " "
 
 vim.opt.guicursor = ""
@@ -17,11 +19,9 @@ autocmd("InsertLeave", {
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-
 vim.opt.smartindent = true
 
 vim.opt.wrap = false
