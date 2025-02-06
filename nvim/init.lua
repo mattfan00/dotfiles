@@ -20,9 +20,9 @@ autocmd('InsertLeave', {
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 
 vim.opt.wrap = false
@@ -98,8 +98,8 @@ require('lazy').setup({
 		dependencies = { 'nvim-lua/plenary.nvim' },
 		config = function()
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-			vim.keymap.set("n", "<C-p>", builtin.git_files, {})
+			-- vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
+			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
 			vim.keymap.set("n", "<leader>ps", builtin.live_grep, {})
 		end
 	},
@@ -286,7 +286,35 @@ require('lazy').setup({
 			}
 		},
 		init = function()
-			vim.cmd('colorscheme rose-pine')
+			--vim.cmd('colorscheme rose-pine')
+		end
+	},
+	{
+		'projekt0n/github-nvim-theme',
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require('github-theme').setup({
+				options = {
+					hide_nc_statusline = false,
+				}
+			})
+			--vim.cmd.colorscheme('github_dark_high_contrast')
+		end,
+	},
+	{
+		'echasnovski/mini.hues',
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require('mini.hues').setup({
+				background = '#000000', 
+				foreground = '#c0c8cc', 
+				n_hues = 6,
+				accent = 'bg',
+				saturation = 'low'
+			})
+
 		end
 	},
 	{ 
