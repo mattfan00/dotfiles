@@ -1,0 +1,3 @@
+background = 000000
+
+bell-features = no-system, no-audio, no-attention, no-title, no-border

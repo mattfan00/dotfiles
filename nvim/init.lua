@@ -47,6 +47,13 @@ autocmd("BufWritePre", {
 	callback = function() vim.lsp.buf.format { async = true } end
 })
 
+vim.o.clipboard = "unnamedplus"
+
+vim.diagnostic.enable = true
+vim.diagnostic.config({
+	virtual_text = true,
+})
+
 -- [[ general keymaps ]]
 
 vim.keymap.set('n', '<leader>h', ':wincmd h<CR>')
@@ -124,36 +131,40 @@ require('lazy').setup({
 			vim.api.nvim_create_autocmd('LspAttach', {
 				group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
 				callback = function(event)
-					local map = function(keys, func, desc)
-						vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+					local map = function(mode, keys, func, desc)
+						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
 					end
 
-					map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-					map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-					map('K', vim.lsp.buf.hover, 'Hover Documentation')
+					map('n', 'gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+					map('n', 'gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+					map('n', 'K', vim.lsp.buf.hover, 'Hover Documentation')
+					map('i', '<C-k>', vim.lsp.buf.signature_help, 'Signature help (shows params when inside parentheses)')
 				end
 			})
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-			local servers = {
-				cssls = {
-					settings = {
-							css = {
-									lint = {
-											-- for tailwind
-										unknownAtRules = "ignore"
-								}
-							}
-					}
-				}
-			}
+			
+			-- local servers = {
+			-- 	cssls = {
+			-- 		settings = {
+			-- 				css = {
+			-- 						lint = {
+			-- 								-- for tailwind
+			-- 							unknownAtRules = "ignore"
+			-- 					}
+			-- 				}
+			-- 		}
+			-- 	}
+			-- }
+
+			local servers = {}
 
 			require('mason').setup()
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
-				'gopls',
+				-- 'gopls',
 				'stylua', -- Used to format Lua code
 			})
 
@@ -275,47 +286,30 @@ require('lazy').setup({
 		end,
 	},
 
-	{ 
-		'rose-pine/neovim',
-		name = 'rose-pine',
-		opts = {
-			styles = {
-				bold = false,
-				italic = false,
-				transparency = true,
-			}
-		},
-		init = function()
-			--vim.cmd('colorscheme rose-pine')
-		end
-	},
+	-- {
+	-- 	'echasnovski/mini.hues',
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require('mini.hues').setup({
+	-- 			background = '#000000', 
+	-- 			foreground = '#c0c8cc', 
+	-- 			n_hues = 6,
+	-- 			accent = 'bg',
+	-- 			saturation = 'low'
+	-- 		})
+	-- 	end
+	-- },
 	{
-		'projekt0n/github-nvim-theme',
+		"loctvl842/monokai-pro.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require('github-theme').setup({
-				options = {
-					hide_nc_statusline = false,
-				}
+			require("monokai-pro").setup({
+				filter = "ristretto"
 			})
-			--vim.cmd.colorscheme('github_dark_high_contrast')
+			vim.cmd.colorscheme("monokai-pro")
 		end,
-	},
-	{
-		'echasnovski/mini.hues',
-		lazy = false,
-		priority = 1000,
-		config = function()
-			require('mini.hues').setup({
-				background = '#000000', 
-				foreground = '#c0c8cc', 
-				n_hues = 6,
-				accent = 'bg',
-				saturation = 'low'
-			})
-
-		end
 	},
 	{ 
 		'tpope/vim-fugitive',

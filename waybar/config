@@ -1,0 +1,19 @@
+{
+    "layer": "top",
+    "position": "top",
+	"height": 30,
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["network", "tray"],
+
+    "clock": {
+        "format": "{:%m/%d/%Y %H:%M}"
+    },
+    "network": {
+        "format-wifi": "[wifi]",
+        "format-disconnected": "[disconnected]"
+    },
+    "tray": {
+        "spacing": 10
+    }
+}
