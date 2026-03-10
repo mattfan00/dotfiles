@@ -8,7 +8,7 @@ window#waybar {
     color: #ffffff;
 }
 
-#network, #tray {
+#clock, #network, #tray {
     padding: 0 10px;
 }
 

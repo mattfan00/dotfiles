@@ -1,13 +1,12 @@
 {
     "layer": "top",
-    "position": "top",
+    "position": "bottom",
 	"height": 30,
     "modules-left": ["sway/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["network", "tray"],
+    "modules-right": ["network", "tray", "clock"],
 
     "clock": {
-        "format": "{:%m/%d/%Y %H:%M}"
+        "format": "{:%Y-%m-%d %H:%M}"
     },
     "network": {
         "format-wifi": "[wifi]",
