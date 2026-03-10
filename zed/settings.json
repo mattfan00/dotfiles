@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "preview_tabs": {
+    "enabled": false
+  },
   "notification_panel": {
     "button": false
   },
@@ -29,12 +32,18 @@
   },
   "bottom_dock_layout": "contained",
   "tab_bar": {
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false,
+    "show": true,
     "show_pinned_tabs_in_separate_row": true
   },
   "tabs": {
+    "git_status": false,
     "file_icons": false
   },
   "title_bar": {
+    "show_user_picture": false,
+    "show_user_menu": false,
     "show_menus": false,
     "show_sign_in": false,
     "show_project_items": true,
@@ -48,6 +57,7 @@
     "folder_icons": true
   },
   "project_panel": {
+    "file_icons": false,
     "dock": "left"
   },
   "buffer_line_height": "standard",
