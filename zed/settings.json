@@ -7,6 +7,17 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "notification_panel": {
+    "button": false
+  },
+  "agent": {
+    "button": true,
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "collaboration_panel": {
+    "button": false
+  },
   "buffer_font_weight": 400.0,
   "ui_font_family": ".ZedSans",
   "vim": {
@@ -32,6 +43,7 @@
   },
   "disable_ai": true,
   "outline_panel": {
+    "button": false,
     "file_icons": true,
     "folder_icons": true
   },
