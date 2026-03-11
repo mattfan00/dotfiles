@@ -2,9 +2,12 @@
     "layer": "top",
     "position": "bottom",
 	"height": 30,
-    "modules-left": ["sway/workspaces"],
+    "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-right": ["network", "tray", "clock"],
 
+	"sway/mode": {
+		"format": "{}"
+	},
     "clock": {
         "format": "{:%Y-%m-%d %H:%M}"
     },

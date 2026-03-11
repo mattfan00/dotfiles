@@ -188,6 +188,19 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+set $exit_mode "exit: [p]oweroff [s]leep [r]eboot"
+mode $exit_mode {
+	bindsym p exec systemctl poweroff
+	bindsym s exec systemctl suspend
+	bindsym r exec systemctl reboot
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+x mode $exit_mode
+ 
 #
 # Utilities:
 #

@@ -8,6 +8,10 @@ window#waybar {
     color: #ffffff;
 }
 
+#mode {
+    padding: 0 10px;
+}
+
 #clock, #network, #tray {
     padding: 0 10px;
 }
