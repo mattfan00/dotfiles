@@ -52,7 +52,18 @@ vim.o.clipboard = "unnamedplus"
 vim.diagnostic.enable = true
 vim.diagnostic.config({
 	virtual_text = true,
+
+	-- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
+	jump = { float = true },
 })
+
+-- non case-sensitive when searching lowercase
+-- case-sensitive when using uppercase
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- search uses the current selection
+vim.keymap.set('v', '/', 'y/\\V<C-r>"<CR>', { noremap = true, silent = true })
 
 -- [[ general keymaps ]]
 
@@ -61,7 +72,7 @@ vim.keymap.set('n', '<leader>j', ':wincmd j<CR>')
 vim.keymap.set('n', '<leader>k', ':wincmd k<CR>')
 vim.keymap.set('n', '<leader>l', ':wincmd l<CR>')
 
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+vim.keymap.set('n', '<leader>pe', vim.cmd.Ex)
 
 vim.keymap.set('n', '<leader>a', '<C-^>') -- switch to alternate (previous) file
 vim.keymap.set('n', '<leader>o', '<C-W><C-O>') -- :only (close all windows but the current one)
@@ -72,22 +83,6 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
-
--- dont replace buffer when pasting over
-vim.keymap.set('x', '<leader>p', [['_dP]])
-
--- yank into system clipboard
-vim.keymap.set({'n', 'v'}, '<leader>y', [['+y]])
-vim.keymap.set('n', '<leader>Y', [['+Y]])
-
--- restart LSP, useful for after go get
-vim.keymap.set('n', '<leader>lr', function()
-	vim.cmd('LspRestart')
-	print('Restarted LSP')
-end)
-
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 
 
 -- [[ lazy.nvim setup ]]
@@ -105,27 +100,18 @@ require('lazy').setup({
 		dependencies = { 'nvim-lua/plenary.nvim' },
 		config = function()
 			local builtin = require("telescope.builtin")
-			-- vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
-			vim.keymap.set("n", "<leader>ps", builtin.live_grep, {})
+			vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = '[p]roject [f]iles' })
+			vim.keymap.set("n", "<leader>ps", builtin.live_grep, { desc = '[p]roject [s]earch' })
+			vim.keymap.set("n", "<leader>pd", builtin.diagnostics, { desc = '[p]roject [d]iagnostics' })
+
 		end
 	},
 
 	{
 		'neovim/nvim-lspconfig',
 		dependencies = {
-			-- Automatically install LSPs and related tools to stdpath for Neovim
-			'williamboman/mason.nvim',
-			'williamboman/mason-lspconfig.nvim',
-			'WhoIsSethDaniel/mason-tool-installer.nvim',
-
 			-- Useful status updates for LSP.
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ 'j-hui/fidget.nvim', opts = {} },
-
-			-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-			-- used for completion, annotations and signatures of Neovim apis
-			{ 'folke/neodev.nvim', opts = {} },
 		},
 		config = function()
 			vim.api.nvim_create_autocmd('LspAttach', {
@@ -135,53 +121,22 @@ require('lazy').setup({
 						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
 					end
 
-					map('n', 'gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-					map('n', 'gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+					map('n', 'gd', require('telescope.builtin').lsp_definitions, '[g]oto [d]efinition')
+					map('n', 'gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
 					map('n', 'K', vim.lsp.buf.hover, 'Hover Documentation')
 					map('i', '<C-k>', vim.lsp.buf.signature_help, 'Signature help (shows params when inside parentheses)')
 				end
 			})
 
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-			
-			-- local servers = {
-			-- 	cssls = {
-			-- 		settings = {
-			-- 				css = {
-			-- 						lint = {
-			-- 								-- for tailwind
-			-- 							unknownAtRules = "ignore"
-			-- 					}
-			-- 				}
-			-- 		}
-			-- 	}
-			-- }
-
-			local servers = {}
-
-			require('mason').setup()
-			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				-- 'gopls',
-				'stylua', -- Used to format Lua code
-			})
-
-			require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-			require('mason-lspconfig').setup {
-				handlers = {
-					function(server_name)
-						local server = servers[server_name] or {}
-						-- This handles overriding only values explicitly passed
-						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for tsserver)
-						server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-						require('lspconfig')[server_name].setup(server)
-					end,
-				},
+			local servers = {
+				basedpyright = {},
 			}
+
+			local lspconfig = require('lspconfig')
+			for name, server in pairs(servers) do
+				lspconfig[name].setup(server)
+			end
 		end
 	},
 
@@ -285,21 +240,6 @@ require('lazy').setup({
 			}
 		end,
 	},
-
-	-- {
-	-- 	'echasnovski/mini.hues',
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		require('mini.hues').setup({
-	-- 			background = '#000000', 
-	-- 			foreground = '#c0c8cc', 
-	-- 			n_hues = 6,
-	-- 			accent = 'bg',
-	-- 			saturation = 'low'
-	-- 		})
-	-- 	end
-	-- },
 	{
 		"loctvl842/monokai-pro.nvim",
 		lazy = false,
@@ -325,19 +265,19 @@ require('lazy').setup({
 			local ui = require("harpoon.ui")
 
 			vim.keymap.set("n", "<leader>ha", function()
-					mark.add_file()
-					print("Added harpoon mark")
+				mark.add_file()
+				print("Added harpoon mark")
 			end)
-			vim.keymap.set("n", "<C-h>", ui.toggle_quick_menu)
-			vim.keymap.set("n", "<leader>1", function() ui.nav_file(1) end)
-			vim.keymap.set("n", "<leader>2", function() ui.nav_file(2) end)
-			vim.keymap.set("n", "<leader>3", function() ui.nav_file(3) end)
-			vim.keymap.set("n", "<leader>4", function() ui.nav_file(4) end)
+			vim.keymap.set("n", "<leader>hm", ui.toggle_quick_menu)
+			vim.keymap.set("n", "<leader>h1", function() ui.nav_file(1) end)
+			vim.keymap.set("n", "<leader>h2", function() ui.nav_file(2) end)
+			vim.keymap.set("n", "<leader>h3", function() ui.nav_file(3) end)
+			vim.keymap.set("n", "<leader>h4", function() ui.nav_file(4) end)
 		end
 	},
 	{
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    config = true
+		'windwp/nvim-autopairs',
+		event = "InsertEnter",
+		config = true
 	}
 })
