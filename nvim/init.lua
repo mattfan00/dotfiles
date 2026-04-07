@@ -23,7 +23,6 @@ vim.opt.relativenumber = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
@@ -51,7 +50,7 @@ vim.o.clipboard = "unnamedplus"
 
 vim.diagnostic.enable = true
 vim.diagnostic.config({
-	virtual_text = true,
+	virtual_text = false,
 
 	-- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
 	jump = { float = true },
@@ -84,6 +83,8 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
+vim.keymap.set('n', '<leader>p', '<NOP>') -- no-op so that it doesn't accidentally paste
+
 
 -- [[ lazy.nvim setup ]]
 
@@ -96,27 +97,38 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 	{
-		'nvim-telescope/telescope.nvim', tag = '0.1.6',
-		dependencies = { 'nvim-lua/plenary.nvim' },
+		"ibhagwan/fzf-lua",
 		config = function()
-			require('telescope').setup {
-				pickers = {
-					buffers = {
-						show_all_buffers = true,
-						sort_lastused = true,
-						mappings = {
-							n = { ['D'] = 'delete_buffer' }
-						}
-					}
-				}
-			}
+			local fzf = require("fzf-lua")
+			fzf.setup({
+				winopts = {
+					preview = {
+						layout = "vertical",
+						vertical = "down:70%",
+					},
+				},
+			})
 
-			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = '[p]roject [f]iles' })
-			vim.keymap.set("n", "<leader>ps", builtin.live_grep, { desc = '[p]roject [s]earch' })
-			vim.keymap.set("n", "<leader>pd", builtin.diagnostics, { desc = '[p]roject [d]iagnostics' })
-			vim.keymap.set("n", "<leader>pb", builtin.buffers, { desc = '[p]roject [b]uffers' })
-		end
+			vim.keymap.set("n", "<leader>pf", function() 
+				fzf.files({ resume = true })
+			end, { desc = 'open [p]roject [f]iles' })
+			vim.keymap.set("n", "<leader>ps", function()
+				fzf.live_grep({ resume = true })
+			end, { desc = 'open [p]roject [s]earch' })
+			vim.keymap.set("v", "<leader>ps", fzf.grep_visual, { desc = 'open [p]roject [s]earch (using selection)' })
+			vim.keymap.set("n", "<leader>pd", fzf.diagnostics_workspace, { desc = 'open [p]roject [d]iagnostics' })
+			vim.keymap.set("n", "<leader>pb", function()
+				fzf.buffers({
+					sort_lastused = true,
+					actions = {
+						["ctrl-x"] = { fn = fzf.actions.buf_del, reload = true },
+					},
+				})
+			end, { desc = 'open [p]roject [b]uffers' })
+			vim.keymap.set("n", "<leader>pm", function()
+				fzf.marks({ marks = "[a-zA-Z]" })
+			end, { desc = 'open [p]roject [m]arks' })
+		end,
 	},
 
 	{
@@ -133,16 +145,19 @@ require('lazy').setup({
 						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
 					end
 
-					map('n', 'gd', require('telescope.builtin').lsp_definitions, '[g]oto [d]efinition')
-					map('n', 'gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
+					map('n', 'gd', require('fzf-lua').lsp_definitions, '[g]oto [d]efinition')
+					map('n', 'gr', require('fzf-lua').lsp_references, '[g]oto [r]eferences')
 					map('n', 'K', vim.lsp.buf.hover, 'Hover Documentation')
 					map('i', '<C-k>', vim.lsp.buf.signature_help, 'Signature help (shows params when inside parentheses)')
+
+					map('n', '<leader>bs', require('fzf-lua').lsp_document_symbols, 'open [b]uffer [s]ymbols')
 				end
 			})
 
 
 			local servers = {
 				basedpyright = {},
+				solargraph = {},
 			}
 
 			local lspconfig = require('lspconfig')
@@ -159,6 +174,9 @@ require('lazy').setup({
 			-- Autoinstall languages that are not installed
 			auto_install = true,
 			highlight = {
+				enable = true,
+			},
+			indent = {
 				enable = true,
 			},
 		},
@@ -258,7 +276,7 @@ require('lazy').setup({
 		priority = 1000,
 		config = function()
 			require("monokai-pro").setup({
-				filter = "ristretto"
+				filter = "spectrum"
 			})
 			vim.cmd.colorscheme("monokai-pro")
 		end,
@@ -272,6 +290,7 @@ require('lazy').setup({
 	},
 	{ 
 		'ThePrimeagen/harpoon',
+		dependencies = { 'nvim-lua/plenary.nvim' },
 		config = function()
 			local mark = require("harpoon.mark")
 			local ui = require("harpoon.ui")
