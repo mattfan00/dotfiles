@@ -77,7 +77,7 @@ fi
 
 CONFIG_DIR=${HOME}/.config
 
-ln -sf ${DOTFILES_DIR}/sway ${CONFIG_DIR}/sway
-ln -sf ${DOTFILES_DIR}/waybar ${CONFIG_DIR}/waybar
-ln -sf ${DOTFILES_DIR}/nvim ${CONFIG_DIR}/nvim
-ln -sf ${DOTFILES_DIR}/ghostty ${CONFIG_DIR}/ghostty
+ln -sf ${DOTFILES_DIR}/sway ${CONFIG_DIR}
+ln -sf ${DOTFILES_DIR}/waybar ${CONFIG_DIR}
+ln -sf ${DOTFILES_DIR}/nvim ${CONFIG_DIR}
+ln -sf ${DOTFILES_DIR}/ghostty ${CONFIG_DIR}
