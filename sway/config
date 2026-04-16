@@ -8,6 +8,7 @@
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+# set $mod Mod1
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -15,6 +16,7 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term ghostty
+# set $term foot
 # Your preferred application launcher
 set $menu wmenu-run
 
@@ -33,6 +35,8 @@ include /etc/sway/config-vars.d/*
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+
+output Virtual-1 resolution 1920x1200 scale 1.6
 
 ### Idle configuration
 #
