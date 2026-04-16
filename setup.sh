@@ -77,8 +77,7 @@ fi
 
 CONFIG_DIR=${HOME}/.config
 
-# The `true` is so that if the symlink exists already then just ignore
-ln -s ${DOTFILES_DIR}/sway ${CONFIG_DIR}/sway || true
-ln -s ${DOTFILES_DIR}/waybar ${CONFIG_DIR}/waybar || true
-ln -s ${DOTFILES_DIR}/nvim ${CONFIG_DIR}/nvim || true
-ln -s ${DOTFILES_DIR}/ghostty ${CONFIG_DIR}/ghostty || true
+ln -sf ${DOTFILES_DIR}/sway ${CONFIG_DIR}/sway
+ln -sf ${DOTFILES_DIR}/waybar ${CONFIG_DIR}/waybar
+ln -sf ${DOTFILES_DIR}/nvim ${CONFIG_DIR}/nvim
+ln -sf ${DOTFILES_DIR}/ghostty ${CONFIG_DIR}/ghostty

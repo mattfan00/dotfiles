@@ -43,12 +43,12 @@ vim.opt.undofile = true
 -- format go files on save
 autocmd("BufWritePre", {
 	pattern = "*.go",
-	callback = function() vim.lsp.buf.format { async = true } end
+	callback = function() vim.lsp.buf.format { async = false } end
 })
 
 vim.o.clipboard = "unnamedplus"
 
-vim.diagnostic.enable = true
+vim.diagnostic.enable(true)
 vim.diagnostic.config({
 	virtual_text = false,
 
@@ -89,7 +89,7 @@ vim.keymap.set('n', '<leader>p', '<NOP>') -- no-op so that it doesn't accidental
 -- [[ lazy.nvim setup ]]
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
 	vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
 end ---@diagnostic disable-next-line: undefined-field
@@ -131,12 +131,10 @@ require('lazy').setup({
 		end,
 	},
 
+	{ 'j-hui/fidget.nvim', opts = {} },
+
 	{
 		'neovim/nvim-lspconfig',
-		dependencies = {
-			-- Useful status updates for LSP.
-			{ 'j-hui/fidget.nvim', opts = {} },
-		},
 		config = function()
 			vim.api.nvim_create_autocmd('LspAttach', {
 				group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -160,9 +158,9 @@ require('lazy').setup({
 				solargraph = {},
 			}
 
-			local lspconfig = require('lspconfig')
-			for name, server in pairs(servers) do
-				lspconfig[name].setup(server)
+			for name, config in pairs(servers) do
+				vim.lsp.config(name, config)
+				vim.lsp.enable(name)
 			end
 		end
 	},
@@ -170,8 +168,8 @@ require('lazy').setup({
 	{
 		'nvim-treesitter/nvim-treesitter',
 		build = ':TSUpdate',
+		main = 'nvim-treesitter',
 		opts = {
-			-- Autoinstall languages that are not installed
 			auto_install = true,
 			highlight = {
 				enable = true,
@@ -180,9 +178,6 @@ require('lazy').setup({
 				enable = true,
 			},
 		},
-		config = function(_, opts)
-			require('nvim-treesitter.configs').setup(opts)
-		end,
 	},
 
 	{
@@ -281,12 +276,18 @@ require('lazy').setup({
 			vim.cmd.colorscheme("monokai-pro")
 		end,
 	},
-	{ 
-		'tpope/vim-fugitive',
-		config = function()
-			vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-			vim.keymap.set("n", "<leader>gw", vim.cmd.Gwrite) -- git add
-		end
+	{
+		"NeogitOrg/neogit",
+		lazy = true,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		cmd = "Neogit",
+		keys = {
+			{ "<leader>gs", "<cmd>Neogit<cr>", desc = "Show Neogit UI" }
+		}
 	},
 	{ 
 		'ThePrimeagen/harpoon',
