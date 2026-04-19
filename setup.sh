@@ -61,10 +61,23 @@ if $(! command -v nvim &> /dev/null); then
 	sudo install ${TMP_DIR}/${NVIM_FILE} ${INSTALL_DIR}/nvim
 fi
 
-# Setup Zsh
+# Setup zsh
 if [ ! -d ${HOME}/.oh-my-zsh ]; then
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
+
+# Setup node
+if $(! command -v nvm &> /dev/null); then
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+	# In lieu of restarting the shell
+	\. "$HOME/.nvm/nvm.sh"
+
+	# Install node
+	nvm install 22
+fi
+
+# Download tree-sitter-cli
+npm install -g tree-sitter-cli
 
 # Setup dev environment and configs
 DEV_DIR=${HOME}/dev
