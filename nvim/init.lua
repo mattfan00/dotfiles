@@ -65,7 +65,6 @@ vim.opt.smartcase = true
 vim.keymap.set('v', '/', 'y/\\V<C-r>"<CR>', { noremap = true, silent = true })
 
 -- [[ general keymaps ]]
-
 vim.keymap.set('n', '<leader>h', ':wincmd h<CR>')
 vim.keymap.set('n', '<leader>j', ':wincmd j<CR>')
 vim.keymap.set('n', '<leader>k', ':wincmd k<CR>')
@@ -83,8 +82,11 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
-vim.keymap.set('n', '<leader>p', '<NOP>') -- no-op so that it doesn't accidentally paste
+vim.keymap.set({'n', 'v'}, '<leader>p', '<NOP>') -- no-op so that it doesn't accidentally paste
 
+vim.keymap.set('n', '<leader>yf', function()
+  vim.fn.setreg('+', vim.fn.expand('%'))
+end)
 
 -- [[ lazy.nvim setup ]]
 
@@ -167,17 +169,8 @@ require('lazy').setup({
 
 	{
 		'nvim-treesitter/nvim-treesitter',
+		lazy = false,
 		build = ':TSUpdate',
-		main = 'nvim-treesitter',
-		opts = {
-			auto_install = true,
-			highlight = {
-				enable = true,
-			},
-			indent = {
-				enable = true,
-			},
-		},
 	},
 
 	{
@@ -282,30 +275,15 @@ require('lazy').setup({
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"sindrets/diffview.nvim",
-			"nvim-telescope/telescope.nvim",
+			"ibhagwan/fzf-lua",
 		},
 		cmd = "Neogit",
 		keys = {
 			{ "<leader>gs", "<cmd>Neogit<cr>", desc = "Show Neogit UI" }
 		}
 	},
-	{ 
-		'ThePrimeagen/harpoon',
-		dependencies = { 'nvim-lua/plenary.nvim' },
-		config = function()
-			local mark = require("harpoon.mark")
-			local ui = require("harpoon.ui")
-
-			vim.keymap.set("n", "<leader>ha", function()
-				mark.add_file()
-				print("Added harpoon mark")
-			end)
-			vim.keymap.set("n", "<leader>hm", ui.toggle_quick_menu)
-			vim.keymap.set("n", "<leader>h1", function() ui.nav_file(1) end)
-			vim.keymap.set("n", "<leader>h2", function() ui.nav_file(2) end)
-			vim.keymap.set("n", "<leader>h3", function() ui.nav_file(3) end)
-			vim.keymap.set("n", "<leader>h4", function() ui.nav_file(4) end)
-		end
+	{
+		"lewis6991/gitsigns.nvim"
 	},
 	{
 		'windwp/nvim-autopairs',
