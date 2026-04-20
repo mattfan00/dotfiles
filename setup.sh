@@ -105,8 +105,10 @@ Signed-By: /etc/apt/keyrings/docker.asc" | sudo tee /etc/apt/sources.list.d/dock
 	sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 	# No need to use sudo
-	sudo groupadd docker
+	sudo groupadd docker || true
 	sudo usermod -aG docker $USER
+
+	echo "Restart your computer for sudo-less docker changes to take effect"
 fi
 
 # Setup dev environment and configs
