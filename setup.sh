@@ -10,13 +10,16 @@
 
 set -e
 
+sudo apt update
+
 # Standard tools
 sudo apt install \
 	fuse \
 	libfuse2 \
 	sway \
 	waybar \
-	firefox-esr
+	firefox-esr \
+	wl-clipboard
 
 # Dev tools
 sudo apt install \
@@ -67,7 +70,7 @@ if [ ! -d ${HOME}/.oh-my-zsh ]; then
 fi
 
 # Setup node
-if $(! command -v nvm &> /dev/null); then
+if [ ! -d ${HOME}/.nvm ]; then
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 	# In lieu of restarting the shell
 	\. "$HOME/.nvm/nvm.sh"
@@ -78,6 +81,33 @@ fi
 
 # Download tree-sitter-cli
 npm install -g tree-sitter-cli
+
+# Setup Docker
+if $(! command -v docker &> /dev/null); then
+	# Add Docker's official GPG key:
+	sudo apt install ca-certificates curl
+	sudo install -m 0755 -d /etc/apt/keyrings
+	sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+	sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+	# Add the repository to Apt sources:
+	# The weird indenting is on purpose
+	echo "Types: deb
+URIs: https://download.docker.com/linux/debian
+Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
+Components: stable
+Architectures: $(dpkg --print-architecture)
+Signed-By: /etc/apt/keyrings/docker.asc" | sudo tee /etc/apt/sources.list.d/docker.sources
+
+	sudo apt update
+
+	# Install packages
+	sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+	# No need to use sudo
+	sudo groupadd docker
+	sudo usermod -aG docker $USER
+fi
 
 # Setup dev environment and configs
 DEV_DIR=${HOME}/dev
